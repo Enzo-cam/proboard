@@ -9,8 +9,8 @@ const connectDB = async () => {
             useUnifiedTopology: true
         })
 
-        const url = `${connection.connection.host}: ${connection.connection.port}`
-        console.log(url)
+        // const url = `${connection.connection.host}: ${connection.connection.port}`
+        // console.log(url)
 
     } catch (error) {
         console.log(error.message)
