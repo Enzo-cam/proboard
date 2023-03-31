@@ -1,13 +1,10 @@
 import express from "express";
+import { registrar } from "../controllers/usuarioController.js";
 
 const usuariosRouter = express.Router()
 
-usuariosRouter.get('/', (req, res) => {
-    res.send('Desde el route de los usuarios')
-})
+// Autenticacion, registro y confirmacion de los usuarios.
+usuariosRouter.post('/', registrar)
 
-usuariosRouter.post('/', (req, res) => {
-    res.send('Posteando en el routing de usuarios')
-})
 
 export default usuariosRouter

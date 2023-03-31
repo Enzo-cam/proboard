@@ -29,6 +29,7 @@ const usuarioSchema = mongoose.Schema({
     }
 )
 
+// Crea el modelo en la BDD
 const Usuario = mongoose.model("Usuario", usuarioSchema)
 
 export default Usuario;
