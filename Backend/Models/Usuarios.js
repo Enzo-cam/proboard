@@ -41,6 +41,11 @@ usuarioSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password, salt)
 })
 
+usuarioSchema.methods.comprobarPassword = async function(passwordForm){
+    // Comprobando que la contraseña que se ingresa al loguear sea la misma que ya esta guardada y encriptada en la base de datos.
+    return await bcrypt.compare(passwordForm, this.password)
+}
+
 // Crea el modelo en la BDD
 const Usuario = mongoose.model("Usuario", usuarioSchema)
 
