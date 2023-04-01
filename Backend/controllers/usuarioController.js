@@ -24,6 +24,40 @@ const registrar = async (req, res) =>{
 
 }
 
+
+const autenticar = async (req, res) => {
+    // Existe el usuario?
+    const {email, password} = req.body
+
+    const usuario = await Usuario.findOne({email})
+    if(!usuario){
+        const error = new Error('El usuario no existe.')
+        return res.status(404).json({msg: error.message})
+    }
+
+    // Comprobar confirmacion
+    if(!usuario.confirmado){
+        const error = new Error('Por favor confirme su cuenta.')
+        return res.status(403).json({msg: error.message})
+    }
+
+
+    // Comprobar contraseña
+    if(await usuario.comprobarPassword(password)){
+        res.json({
+            _id: usuario._id,
+            nombre: usuario.nombre,
+            email: usuario.email
+        })
+    }else{
+        const error = new Error('La contraseña es incorrecta.')
+        return res.status(403).json({msg: error.message})
+    }    
+    
+
+}
+
 export {
-    registrar
+    registrar,
+    autenticar
 }
