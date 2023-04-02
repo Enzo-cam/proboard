@@ -1,5 +1,5 @@
 import express from "express";
-import { registrar, autenticar } from "../controllers/usuarioController.js";
+import { registrar, autenticar, confirmar } from "../controllers/usuarioController.js";
 
 const usuariosRouter = express.Router()
 
@@ -7,6 +7,8 @@ const usuariosRouter = express.Router()
 usuariosRouter.post('/', registrar)
 
 usuariosRouter.post('/login', autenticar)
+
+usuariosRouter.get('/confirmar/:token', confirmar)
 
 
 export default usuariosRouter

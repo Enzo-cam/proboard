@@ -22,9 +22,7 @@ const registrar = async (req, res) =>{
     } catch (error) {
         console.log(error)
     }
-
 }
-
 
 const autenticar = async (req, res) => {
     // Existe el usuario?
@@ -42,7 +40,6 @@ const autenticar = async (req, res) => {
         return res.status(403).json({msg: error.message})
     }
 
-
     // Comprobar contraseña
     if(await usuario.comprobarPassword(password)){
         res.json({
@@ -54,12 +51,15 @@ const autenticar = async (req, res) => {
     }else{
         const error = new Error('La contraseña es incorrecta.')
         return res.status(403).json({msg: error.message})
-    }    
-    
+    }
+}
 
+const confirmar = async (req, res) =>{
+    console.log('Routing dinamico')
 }
 
 export {
     registrar,
-    autenticar
+    autenticar,
+    confirmar
 }
