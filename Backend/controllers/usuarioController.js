@@ -55,11 +55,34 @@ const autenticar = async (req, res) => {
 }
 
 const confirmar = async (req, res) =>{
-    console.log('Routing dinamico')
+
+    const {token} = req.params
+
+    // Buscamos al usuario según el token que se pasó en el parametro.
+    const usuarioConfirm = await Usuario.findOne({token})
+
+    if(!usuarioConfirm){
+        const error = new Error('Token no válido.')
+        return res.status(403).json({ msg: error.message })
+    }
+
+    // En caso de encontrar al usuario lo confirmamos y vaciamos el campo de token.
+    // Por ultimo guardamos los cambios ejecutados.
+    try {
+        usuarioConfirm.confirmado = true
+        usuarioConfirm.token = ''
+        await usuarioConfirm.save()
+        res.json({msg: 'Usuario confirmado correctamente.'})
+    } catch (error) {
+        console.log(error)
+    }
 }
+
+
 
 export {
     registrar,
     autenticar,
-    confirmar
+    confirmar,
+    nuevaPassword
 }
