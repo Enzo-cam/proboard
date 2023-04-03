@@ -54,6 +54,7 @@ const autenticar = async (req, res) => {
     }
 }
 
+// Confirmamos al usuario que fue registrado y lo guardamos.
 const confirmar = async (req, res) =>{
 
     const {token} = req.params
@@ -78,6 +79,7 @@ const confirmar = async (req, res) =>{
     }
 }
 
+// Generamos un nuevo token el cual se manda por email para luego generar una nueva contraseña.
 const olvidePassword = async (req, res) => {
     const { email } = req.body
     const usuario = await Usuario.findOne({email}) 
@@ -97,6 +99,7 @@ const olvidePassword = async (req, res) => {
 
 }
 
+// Comprobamos que el token que se pasa es valido
 const comprobarToken = async (req, res) => {
     const {token} = req.params;
 
@@ -111,7 +114,8 @@ const comprobarToken = async (req, res) => {
 
 }
 
-const nuevoPassword = async(req, res) => {
+// Seteamos la nueva contraseña pasada en el body al token correspondiente
+const nuevoPassword = async (req, res) => {
     const {token} = req.params
     const {password} = req.body
 
@@ -133,7 +137,12 @@ const nuevoPassword = async(req, res) => {
 
 }
 
- 
+const perfil = async (req, res) =>{
+    const {usuario} = req
+
+    res.json(usuario)
+}
+
 
 export {
     registrar,
@@ -141,5 +150,6 @@ export {
     confirmar,
     comprobarToken,
     olvidePassword,
-    nuevoPassword
+    nuevoPassword,
+    perfil
 }
