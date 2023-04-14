@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import Usuario from "../Models/Usuarios.js";
+import Usuario from "../Models/Usuario.js";
 
 const checkAuth = async (req, res, next) => {
     let token;
@@ -11,13 +11,13 @@ const checkAuth = async (req, res, next) => {
             req.usuario = await Usuario.findById(decoded.id).select("-password -confirmado -token -createdAt -updatedAt -__v")
             return next()
         } catch (error) {
-            res.status(404).json({msg: 'El error es: ' + error })
+            return res.status(404).json({msg: 'El error es: ' + error })
         }
     }
 
     if(!token){
         const error = new Error('Token no válido.')
-        res.status(201).json({msg: error.message})
+        return res.status(201).json({msg: error.message})
     }
 
     next()
