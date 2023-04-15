@@ -7,7 +7,6 @@ import {
     deleteProject,
     addColaborator,
     deleteColaborator,
-    obtainTasks
 } from '../controllers/proyectoController.js'
 
 import checkAuth from '../middleware/checkAuth.js'
@@ -25,8 +24,6 @@ proyectosRouter
     .put(checkAuth, editProject)
     .delete(checkAuth, deleteProject)
 
-proyectosRouter
-    .route('/tareas/:id', checkAuth, obtainTasks)
 
 proyectosRouter
     .post('/add-colaborator/:id', checkAuth, addColaborator)
