@@ -1,4 +1,5 @@
 import Proyecto from "../Models/Proyecto.js"
+import Tarea from "../Models/Tarea.js"
 
 const getProjects = async (req, res) =>{
     // All project that match the creator and the usuario who request.
@@ -21,7 +22,11 @@ const getProject = async (req, res) =>{
         return res.status(404).json({ msg: "Proyecto no encontrado." })
     }
 
-    res.json(project)
+    const tasks = await Tarea.find().where("proyecto").equals(project._id)
+    res.json({
+        project,
+        tasks
+    })
 }
 
 const newProject = async (req, res) =>{
@@ -88,9 +93,6 @@ const deleteColaborator = async (req, res) =>{
 
 }
 
-const obtainTasks = async (req, res) => {
-
-}
 
 export {
     getProjects,
@@ -100,6 +102,5 @@ export {
     deleteProject,
     addColaborator,
     deleteColaborator,
-    obtainTasks
 }
 
