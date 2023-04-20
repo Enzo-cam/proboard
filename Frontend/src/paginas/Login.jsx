@@ -31,7 +31,7 @@ const Login = () => {
       <nav className="lg:flex lg:justify-between">
         <Link
           to="registrar"
-          className="block text-center my-5 font-medium text-slate-700 uppercase text-sm"
+          className="block text-center my-5 font-bold text-slate-700 uppercase text-sm"
         >
           Registrarse
         </Link>
