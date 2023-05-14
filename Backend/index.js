@@ -10,7 +10,7 @@ app.use(express.json())
 dotenv.config()
 connectDB()
 
-// Routing
+// Routing para cada endpoint
 app.use('/api/usuarios', usuariosRouter)
 app.use('/api/proyectos', proyectosRouter)
 app.use('/api/tareas', tareasRouter)

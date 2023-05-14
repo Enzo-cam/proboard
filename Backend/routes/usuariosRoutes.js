@@ -5,17 +5,15 @@ import checkAuth from "../middleware/checkAuth.js";
 const usuariosRouter = express.Router()
 
 // Autenticacion, registro y confirmacion de los usuarios.
-usuariosRouter.post('/', registrar)
+usuariosRouter.post('/', registrar) //Crear usuario
 
-usuariosRouter.post('/login', autenticar)
+usuariosRouter.post('/login', autenticar)//Autenticamos a los usuarios
 
-usuariosRouter.get('/confirmar/:token', confirmar)
+usuariosRouter.get('/confirmar/:token', confirmar) //Segun el token que llega, confirmamos al usuario
 
 usuariosRouter.post('/olvide-password', olvidePassword)
 
-usuariosRouter.get('/olvide-password/:token', comprobarToken)
-
-usuariosRouter.post('/olvide-password/:token', nuevoPassword)
+usuariosRouter.route('/olvide-password/:token').get(comprobarToken).post(nuevoPassword)
 
 usuariosRouter.get('/perfil', checkAuth, perfil)
 

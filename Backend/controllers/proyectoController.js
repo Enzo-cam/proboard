@@ -4,14 +4,12 @@ import Tarea from "../Models/Tarea.js"
 const getProjects = async (req, res) =>{
     // All project that match the creator and the usuario who request.
     const projects = await Proyecto.find().where('creador').equals(req.usuario)
-
     res.json(projects)
 }
 
 const getProject = async (req, res) =>{
     const {id} = req.params
     const project = await Proyecto.findById(id)
-
 
     if(!project){
         const error = new Error('Proyecto no encontrado..')
