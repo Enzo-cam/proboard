@@ -8,7 +8,7 @@ const registrar = async (req, res) => {
   const emailDuplicado = await Usuario.findOne({ email: email });
 
   if (emailDuplicado) {
-    const error = new Error("El mail ya fue registrado.");
+    const error = new Error("Existe un usuario registrado.");
     return res.status(400).json({ msg: error.message });
   }
 
@@ -18,7 +18,9 @@ const registrar = async (req, res) => {
     usuario.token = generarId();
     // Esperamos que se realice el guardado del usuario en la BDD.
     const usuarioGuardado = await usuario.save();
-    res.json(usuarioGuardado);
+    res.json({
+      msg: 'Usuario creado correctamente. \nPor favor revise su email para confirmar la cuenta'
+    });
   } catch (error) {
     console.log(error);
   }
