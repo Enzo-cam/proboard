@@ -1,6 +1,8 @@
 import Usuario from "../Models/Usuario.js";
 import generarId from "../helpers/generarId.js";
 import generarJWT from "../helpers/generarJWT.js";
+import { emailRegister } from "../helpers/email.js";
+
 
 const registrar = async (req, res) => {
   // Revisando email's duplicados
@@ -17,7 +19,13 @@ const registrar = async (req, res) => {
     const usuario = new Usuario(req.body);
     usuario.token = generarId();
     // Esperamos que se realice el guardado del usuario en la BDD.
-    const usuarioGuardado = await usuario.save();
+    await usuario.save();
+    emailRegister({
+      email: usuario.email,
+      nombre: usuario.nombre,
+      token: usuario.token
+    })
+    
     res.json({
       msg: 'Usuario creado correctamente. \nPor favor revise su email para confirmar la cuenta'
     });
