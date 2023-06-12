@@ -12,14 +12,14 @@ dotenv.config()
 connectDB()
 
 // Habilitar CORS
-const whitelist = [process.env.FRONT_URL]
+const whitelist = [process.env.FRONT_URL, process.env.VITE_BACK_URL]
 
 const corsOptions = {
     origin : function(origin, callback){
         if(whitelist.includes(origin)){
             callback(null, true)
         }else{
-            callback(new Error('Error de CORS'))
+            callback(new Error('Error de CORSssssss'))
         }
     }
 }
